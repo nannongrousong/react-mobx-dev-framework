@@ -1,0 +1,115 @@
+.logo {
+    text-align: center;
+
+    img {
+        height: 64px;
+    }
+
+    span {
+        font-size: 30px;
+        color: white;
+        height: 64px;
+        vertical-align: middle; 
+        margin-left: 5px;
+    }
+}
+
+.header {
+    background-color: #fff;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    :global {
+        .left {
+            flex: 0 0 200px;
+        }
+
+        .center {
+            flex: 1;
+        }
+
+        .right {
+            flex: 0 0 150px;
+        }
+    }
+}
+
+.layout-content {
+    position: relative;
+}
+
+.content {
+    overflow-y: auto;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    padding: 20px;
+    background-color: #FFF;
+}
+
+.switch-icon {
+    font-size: 16px;
+    padding: 24px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #e6f7ff;
+    }
+}
+
+.userinfo {
+    cursor: pointer;
+    text-align: right;
+    padding: 0 20px;
+    &:hover {
+        background-color: #e6f7ff;
+    }
+    img {
+        height:30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+    a {
+        margin-left: 10px;
+    }
+}
+
+/* 首页覆盖antd样式 */
+:global {
+    //  表格斑马行
+    .ant-table-row:nth-child(2n) {
+        background-color: #fafafa;
+    }
+
+    //  menu导航 上下两部分
+    .ant-layout-sider-children, 
+    .ant-layout-sider-trigger {
+        background-color: #2a3542;
+    }
+
+    //  menu导航垂直允许滚动
+    .ant-layout-sider-children {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    //  导航菜单被选中
+    .ant-menu.ant-menu-dark .ant-menu-item-selected {
+        background-color: transparent;
+        color: #FF6C60;
+    }
+
+    //  导航菜单被选中的父级
+    .ant-menu-submenu-selected .ant-menu-submenu-title i {
+        color: #FF6C60;
+    }
+
+    //  导航背景色
+    .ant-menu-dark {
+        background-color: #2a3542;
+    }
+}
