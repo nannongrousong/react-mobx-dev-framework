@@ -3,6 +3,9 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 //  antd样式覆盖
 const antdCover = require(path.resolve(__dirname, './src/admin/config/antdCover.js'));
 const webpack = require('webpack');
@@ -90,9 +93,7 @@ let webpackConfig = {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
-                options: {
-                    cacheDirectory: true
-                }
+                loader: 'happypack/loader?id=happyBabel'
             },
             {
                 test: /\.css$/,
@@ -185,6 +186,17 @@ let webpackConfig = {
                 chunksSortMode: 'none',
                 favicon: path.resolve(__dirname, item.favicon)
             });
+        }),
+        new HappyPack({
+            id: 'happyBabel',
+            loaders: [{
+                loader: 'babel-loader',
+                options: {
+                    cacheDirectory: isDev,
+                }
+            }],
+            threadPool: happyThreadPool,
+            verbose: true
         })
     ]
 }
