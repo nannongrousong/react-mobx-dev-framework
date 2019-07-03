@@ -7,7 +7,7 @@ const HappyPack = require('happypack');
 const os = require('os');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 //  antd样式覆盖
-const antdCover = require(path.resolve(__dirname, './src/admin/config/antdCover.js'));
+const antdCover = require(path.resolve(__dirname, './src/config/antdCover.ts'));
 const webpack = require('webpack');
 const fs = require('fs');
 const projectConfig = require('./project.config');
@@ -72,10 +72,11 @@ let webpackConfig = {
         publicPath: isDev ? '/' : './'
     },
     resolve: {
-        extensions: ['.js', '.css', '.json'],
+        extensions: ['.js', '.css', '.json', '.ts', '.tsx'],
         alias: {
             ...webpackAlias,
-            '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/admin/config/icon.js')
+            '@': path.resolve(__dirname, './src')
+            //  '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/config/icon.js')
         }
     },
     optimization: {
@@ -84,14 +85,16 @@ let webpackConfig = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx|ts|tsx)$/,
                 loader: 'eslint-loader',
                 exclude: /node_modules/,
-                enforce: 'pre'
+                enforce: 'pre',
+                options: {
+                    failOnWarning: true
+                }
             },
             {
-                test: /\.(js|jsx)$/,
-                loader: 'babel-loader',
+                test: /\.(js|jsx|ts|tsx)$/,
                 exclude: /node_modules/,
                 loader: 'happypack/loader?id=happyBabel'
             },

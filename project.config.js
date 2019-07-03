@@ -2,10 +2,10 @@ module.exports = {
     port: 9000,
     entries: [{
         name: 'admin',
-        entry: 'src/admin/index.js',
+        entry: 'src/index.tsx',
         title: '开放平台 - 开发',
-        template: 'src/admin/index.html',
-        favicon: 'src/admin/favicon.ico'
+        template: 'src/index.html',
+        favicon: 'src/favicon.ico'
     }],
     proxy: [{
         //  拦截的路由匹配
